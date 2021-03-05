@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+
+
+    function printhello(){
+        console.log("hello world");
+    }
+    printhello();
+
+//Assigning a function to a variable.
+    var printHello = function (){
+        console.log("Hello World");
+    };
+    printHello();
+
+// passing a function through a function.
+    function printer(sink){
+        sink();
+    }
+    printer(printhello);
+
+//create an object with properties. eg:- printname is a property function is the value of the property.
+    var person ={
+        name : "dilan",
+        age : 21,
+        printname : function (){
+            console.log(this.name)
+        }
+    };
+    //Here we have called the function using the property "printname"
+    person.printname();
+
+    var vehicleName = 'Toyota'
+    function printVehicleName (){
+        console.log(this.vehicleName)
+    }
+    printVehicleName();
+
+    var car = {
+        vehicleName:'Nissan',
+        getvehicleName : function (){
+            return function () {
+                console.log(this.vehicleName)
+            }
+        }
+    }
+
+    /* test01
+    var van = {
+        vehicleName:'mazda',
+        getvehicleName : function (){
+            return function () {
+                console.log(this.vehicleName)
+            }
+        }
+    }*/
+
+    //car.getvehicleName();
+    var execute = car.getvehicleName()// here it calls the original function
+    execute = execute.bind(car) // here it calls the property of the bound object
+    execute();
+
+    function taxcalculator(percentage){
+        return function (amount){
+            return amount*percentage;
+        }
+    }
+    //function closure
+
+    var calculator = taxcalculator(.12)
+    console.log(calculator(200))
+
+    fetch('http://jsonplaceholder.typicode.com/posts').then(function (response){
+        return response.json();
+    }).then(function (data)
+    {console.log(data)});
+
+
+
+</script>
+
+</body>
+</html>
